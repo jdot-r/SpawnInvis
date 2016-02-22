@@ -2,23 +2,20 @@ name: SpawnInvis
 main: SpawnInvis\Main
 version: 1.0.0
 api: 1.13.1
-description: This plugin makes players within the spawn radius invisable without particles
-author: jasonwynn10
-
+description: "In a set spawn radius, players will be automatically invisable."
 commands:
-  invis:
-    usage: "/invis"
-    description: ""
-    permission: invis.toggle
-  pinvis:
-    usage: "/pinvis"
-    description: ""
-    permission: pinvis.toggle
-    
-    permissions:
+    invis:
+        description: "Toggles Spawn Invisability"
+        permission: invis.toggle
+        usage: "/invis"
+    pinvis:
+        description: "sets specific player's invisability in spawn"
+        permission: pinvis.toggle
+        usage: "/pinvis"
+permissions:
     invis.toggle:
-      default: op
-      description: ""
+        usage: "/invis"
+        description: "Toggles Spawn Invisability"
     pinvis.toggle:
-      default: true
-      description: ""
+        usage: "/pinvis"
+        description: "Toggles Specific Player's Invisability"
