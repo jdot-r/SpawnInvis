@@ -8,14 +8,8 @@ commands:
         description: "Toggles Spawn Invisability"
         permission: invis.toggle
         usage: "/invis"
-    pinvis:
-        description: "sets specific player's invisability in spawn"
-        permission: pinvis.toggle
-        usage: "/pinvis"
 permissions:
     invis.toggle:
         usage: "/invis"
         description: "Toggles Spawn Invisability"
-    pinvis.toggle:
-        usage: "/pinvis"
-        description: "Toggles Specific Player's Invisability"
+        default: op

@@ -9,31 +9,20 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat as Color;
-use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\player\PlayerMoveEvent;
 
 class Main extends pluginBase implements Listener  {
 
-    public $players = [];
-
     public function onEnable() {
-        $this->Invis = true;
-        $this->pInvis = true;
+        $this->Invis = false;
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
-    }
-
-    public function isInvis($entity){
-        if() {
-            return true;
-        }else{
-            return false;
-        }
     }
 
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
         if(strtolower($cmd->getName()) == "invis" ) {
-            if($sender->isOp()) {
+            if($sender->hasPermission("invis.toggle") || !$sender instanceof Player) {
                 $this->Invis = !$this->Invis;
-                if($this->inSpawn($sender->getName())) {
+                if($this->Invis) {
                     $sender->sendMessage("[SpawnInvis] Spawn Invisability enabled!");
                     $this->getLogger()->info(Color::YELLOW . "Spawn Invisability enabled!");
                 } else {
@@ -44,23 +33,21 @@ class Main extends pluginBase implements Listener  {
                 $sender->sendMessage("You do not have permission to toggle spawn Invisability.");
             }
             return true;
-        } elseif(strtolower($cmd->getName()) == "pinvis" ) {
-            if($this->isInvis($sender->getname())) {
-
-            }
-            return true;
         } else {
             return false;
         }
     }
 
-    public function inSpawn($entity){
+    public function spawnCheck(PlayerMoveEvent $event) {
+        $entity = $event->getPlayer();
         $v = new Vector3($entity->getLevel()->getSpawnLocation()->getX(),$entity->getPosition()->getY(),$entity->getLevel()->getSpawnLocation()->getZ());
         $r = $this->getServer()->getSpawnRadius();
-
-    }
-
-    public function temp() {
-
+        if(($entity->getPosition()->distance($v) <= $r) && ($this->Invis == true)) {
+            $entity->getEffect(14);
+            return;
+        }elseif(($entity->getPosition()->distance($v) > $r) && ($this->Invis == true)) {
+            $entity->removeEffect(14);
+            return;
+        }
     }
 }
