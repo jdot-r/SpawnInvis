@@ -1,5 +1,5 @@
 <?php
-namespace Manager;
+namespace SpawnInvis;
 
 use pocketmine\math\Vector3;
 use pocketmine\command\Command;
