@@ -11,12 +11,13 @@ use pocketmine\Server;
 use pocketmine\utils\TextFormat as Color;
 use pocketmine\event\player\PlayerMoveEvent;
 
-class Main extends pluginBase implements Listener  {
+class Main extends PluginBase implements Listener  {
 
     public $Invis;
 
     public function onEnable() {
         $this->Invis = false;
+        $this->getLogger()->info(Color::BOLD.Color::GREEN."[SpawnInvis] DIsabled!");
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
     }
 
@@ -51,5 +52,9 @@ class Main extends pluginBase implements Listener  {
             $entity->removeEffect(14);
             return;
         }
+    }
+    
+    public function onDisable() {
+        $this->getLogger()->info(Color::BOLD.Color::GREEN."[SpawnInvis] DIsabled!");
     }
 }
