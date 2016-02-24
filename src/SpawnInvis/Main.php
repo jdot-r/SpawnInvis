@@ -13,6 +13,8 @@ use pocketmine\event\player\PlayerMoveEvent;
 
 class Main extends pluginBase implements Listener  {
 
+    public $Invis;
+
     public function onEnable() {
         $this->Invis = false;
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
@@ -20,7 +22,7 @@ class Main extends pluginBase implements Listener  {
 
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
         if(strtolower($cmd->getName()) == "invis" ) {
-            if($sender->hasPermission("invis.toggle") || !$sender instanceof Player) {
+            if($sender->hasPermission("invis.toggle") || $sender->getName() === "CONSOLE") {
                 $this->Invis = !$this->Invis;
                 if($this->Invis) {
                     $sender->sendMessage("[SpawnInvis] Spawn Invisability enabled!");
