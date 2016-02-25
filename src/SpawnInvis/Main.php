@@ -14,10 +14,14 @@ use pocketmine\event\player\PlayerMoveEvent;
 class Main extends PluginBase implements Listener  {
 
     public $Invis;
-
+    
+    public function onLoad() {
+        $this->getLogger()->info(Color::BOLD.Color::GREEN."[SpawnInvis] Loaded!");
+    }
+    
     public function onEnable() {
         $this->Invis = false;
-        $this->getLogger()->info(Color::BOLD.Color::GREEN."[SpawnInvis] DIsabled!");
+        $this->getLogger()->info(Color::BOLD.Color::GREEN."[SpawnInvis] Enabled!");
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
     }
 
@@ -55,6 +59,6 @@ class Main extends PluginBase implements Listener  {
     }
     
     public function onDisable() {
-        $this->getLogger()->info(Color::BOLD.Color::GREEN."[SpawnInvis] DIsabled!");
+        $this->getLogger()->info(Color::BOLD.Color::GREEN."[SpawnInvis] Disabled!");
     }
 }
